@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopio - Premium Mobile eCommerce UI Template</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #ff7a00;
+            --text: #111;
+            --muted: #777;
+            --bg: #f8f9fa;
+            --card: #f9f9f9;
+            --border: #eee;
+            --star: #ffc107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            color: var(--text);
+            padding-bottom: 80px;
+            overflow-x: hidden;
+        }
+
+        /* CONTAINER WITH BETTER RESPONSIVENESS */
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            background: #fff;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* HEADER (Semantic) */
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .menu-toggle {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .brand-logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .brand-logo span {
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .header-actions i {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .cart-icon-wrapper {
+            position: relative;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: var(--primary);
+            color: #fff;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* SEARCH SECTION */
+        .search-section {
+            padding: 0 16px 20px;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-wrapper .fa-search {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 48px 14px 46px;
+            border: none;
+            border-radius: 12px;
+            background: var(--bg);
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            background: #fff;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .filter-btn {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        /* HERO BANNER SECTION */
+        .promo-banner {
+            position: relative;
+            margin: 0 16px 24px;
+            padding: 24px 24px 32px;
+            background: linear-gradient(135deg, #7d0905, #520200);
+            border-radius: 20px;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .promo-tag {
+            font-size: 12px;
+            color: #ffb17a;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .promo-banner h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .promo-banner p {
+            width: 55%;
+            font-size: 13px;
+            line-height: 1.4;
+            margin-bottom: 18px;
+            opacity: 0.9;
+        }
+
+        .shop-now-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 11px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .shop-now-btn:hover {
+            background: #e06c00;
+        }
+
+        .banner-images {
+            position: absolute;
+            right: -10px;
+            bottom: 0;
+            width: 50%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .banner-placeholder-img {
+            max-width: 100%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .banner-dots {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 12px;
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .4);
+        }
+
+        .dot.active {
+            width: 14px;
+            border-radius: 6px;
+            background: #fff;
+        }
+
+        /* CATEGORIES SCROLLER */
+        .categories-scroller {
+            display: flex;
+            gap: 16px;
+            padding: 0 16px 28px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .categories-scroller::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 68px;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .category-icon-box {
+            width: 62px;
+            height: 62px;
+            border-radius: 16px;
+            background: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 22px;
+            transition: transform 0.2s ease;
+        }
+
+        .category-item:hover .category-icon-box {
+            transform: translateY(-2px);
+        }
+
+        .c-fashion { color: #8b2626; }
+        .c-electronics { color: #e67e22; }
+        .c-home { color: #f39c12; }
+        .c-beauty { color: #2ecc71; }
+        .c-sports { color: #2980b9; }
+
+        .category-item span {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* SECTION HEADER COMPONENT */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px 14px;
+        }
+
+        .section-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .see-all-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* HORIZONTAL SCROLL GRIDS */
+        .horizontal-grid {
+            display: flex;
+            gap: 12px;
+            padding: 0 16px 28px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .horizontal-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .top-cat-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 16px;
+            min-width: 115px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .top-cat-card img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 12px;
+        }
+
+        .top-cat-card .title {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .top-cat-card .deal {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* PRODUCTS GRID */
+        .products-grid {
+            display: flex;
+            gap: 12px;
+            padding: 0 16px 20px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .products-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .product-card {
+            position: relative;
+            background: var(--card);
+            border-radius: 16px;
+            padding: 12px;
+            min-width: 145px;
+            flex-shrink: 0;
+        }
+
+        .fav-trigger {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,.08);
+            color: #999;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .product-card img {
+            width: 100px;
+            height: 100px;
+            display: block;
+            margin: 10px auto;
+            object-fit: contain;
+        }
+
+        .p-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .p-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-weight: 700;
+        }
+
+        .p-rating {
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .p-rating i {
+            color: var(--star);
+        }
+
+        /* BOTTOM NAVIGATION (Semantic & Fixed) */
+        .bottom-nav {
+            position: fixed;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            height: 66px;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            box-shadow: 0 -4px 12px rgba(0,0,0,.05);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #999;
+            font-size: 11px;
+            gap: 4px;
+            width: 20%;
+            text-align: center;
+        }
+
+        .nav-item i {
+            font-size: 18px;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <header class="main-header">
+        <i class="fa-solid fa-bars menu-toggle" aria-label="Open Menu"></i>
+        <div class="brand-logo">
+            Shopio<span>.</span>
+        </div>
+        <div class="header-actions">
+            <i class="fa-regular fa-heart" aria-label="Favorites"></i>
+            <div class="cart-icon-wrapper">
+                <i class="fa-solid fa-cart-shopping" aria-label="Cart"></i>
+                <div class="cart-badge">3</div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        
+        <section class="search-section" aria-label="Search">
+            <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass fa-search"></i>
+                <input type="text" class="search-input" placeholder="Search for products, brands...">
+                <i class="fa-solid fa-sliders filter-btn" aria-label="Filter Results"></i>
+            </div>
+        </section>
+
+        <section class="promo-banner" aria-label="Promotions">
+            <div class="promo-tag">Summer Sale</div>
+            <h1>Up to 50% Off</h1>
+            <p>Discover the best deals on fashion, electronics & more!</p>
+            <button class="shop-now-btn">Shop Now</button>
+            
+            <div class="banner-images">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 24 24' fill='none' stroke='%23ffb17a' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'><path d='M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z'></path><line x1='3' y1='6' x2='21' y2='6'></line><path d='M16 10a4 4 0 0 1-8 0'></path></svg>" class="banner-placeholder-img" alt="Summer Sale Bundle Placeholder">
+            </div>
+
+            <div class="banner-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
+
+        <nav class="categories-scroller" aria-label="Product Quick Categories">
+            <a href="#" class="category-item">
+                <div class="category-icon-box">
+                    <i class="fa-solid fa-shirt c-fashion"></i>
+                </div>
+                <span>Fashion</span>
+            </a>
+            <a href="#" class="category-item">
+                <div class="category-icon-box">
+                    <i class="fa-solid fa-laptop c-electronics"></i>
+                </div>
+                <span>Electronics</span>
+            </a>
+            <a href="#" class="category-item">
+                <div class="category-icon-box">
+                    <i class="fa-solid fa-chair c-home"></i>
+                </div>
+                <span>Home</span>
+            </a>
+            <a href="#" class="category-item">
+                <div class="category-icon-box">
+                    <i class="fa-solid fa-pump-soap c-beauty"></i>
+                </div>
+                <span>Beauty</span>
+            </a>
+            <a href="#" class="category-item">
+                <div class="category-icon-box">
+                    <i class="fa-solid fa-volleyball c-sports"></i>
+                </div>
+                <span>Sports</span>
+            </a>
+        </nav>
+
+        <section aria-labelledby="top-categories-title">
+            <div class="section-header">
+                <h3 id="top-categories-title">Top Categories</h3>
+                <a href="#" class="see-all-link">
+                    See All <i class="fa-solid fa-chevron-right"></i>
+                </a>
+            </div>
+
+            <div class="horizontal-grid">
+                <div class="top-cat-card">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23777' stroke-width='1.5'><rect x='6' y='3' width='12' height='18' rx='2'></rect><path d='M12 1v2M12 21v2'></path></svg>" alt="Smart Watch Placeholder">
+                    <div class="title">Smart Watch</div>
+                    <div class="deal">Up to 40% Off</div>
+                </div>
+                <div class="top-cat-card">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23777' stroke-width='1.5'><path d='M3 18v-6a9 9 0 0 1 18 0v6'></path><path d='M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z'></path></svg>" alt="Headphones Placeholder">
+                    <div class="title">Headphones</div>
+                    <div class="deal">Up to 30% Off</div>
+                </div>
+                <div class="top-cat-card">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23777' stroke-width='1.5'><path d='M4 20V10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z'></path><path d='M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2'></path></svg>" alt="Backpack Placeholder">
+                    <div class="title">Backpack</div>
+                    <div class="deal">Up to 25% Off</div>
+                </div>
+                <div class="top-cat-card">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23777' stroke-width='1.5'><path d='M3 12h18M3 12a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4M3 12v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6'></path></svg>" alt="Shoes Placeholder">
+                    <div class="title">Shoes</div>
+                    <div class="deal">Up to 40% Off</div>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="best-selling-title">
+            <div class="section-header">
+                <h3 id="best-selling-title">Best Selling Products</h3>
+                <a href="#" class="see-all-link">
+                    See All <i class="fa-solid fa-chevron-right"></i>
+                </a>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="fav-trigger">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 24 24' fill='none' stroke='%23bbb' stroke-width='1.5'><path d='M20.38 3.46L16 2a2 2 0 0 0-2 2v2H10V4a2 2 0 0 0-2-2L3.62 3.46A2 2 0 0 0 2 5.42V20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V5.42a2 2 0 0 0-1.62-1.96z'></path></svg>" alt="Men Overshirt Placeholder">
+                    <div class="p-title">Men Overshirt</div>
+                    <div class="p-meta-row">
+                        <span class="price">$29.99</span>
+                        <span class="p-rating">
+                            <i class="fa-solid fa-star"></i> 4.5
+                        </span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="fav-trigger">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 24 24' fill='none' stroke='%23bbb' stroke-width='1.5'><rect x='6' y='3' width='12' height='18' rx='2'></rect></svg>" alt="Smart Watch Placeholder">
+                    <div class="p-title">Smart Watch</div>
+                    <div class="p-meta-row">
+                        <span class="price">$59.99</span>
+                        <span class="p-rating">
+                            <i class="fa-solid fa-star"></i> 4.7
+                        </span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="fav-trigger">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 24 24' fill='none' stroke='%23bbb' stroke-width='1.5'><path d='M3 15h18v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4zM3 15V9a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v6'></path></svg>" alt="Sneakers Placeholder">
+                    <div class="p-title">Sneakers</div>
+                    <div class="p-meta-row">
+                        <span class="price">$49.99</span>
+                        <span class="p-rating">
+                            <i class="fa-solid fa-star"></i> 4.6
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bottom-nav">
+       
